@@ -1,0 +1,39 @@
+El script "run_analysis.R" contiene los siguientes 7 pasos:
+
+1.Descargar los datos:
+
+  Descargar y extraer los datos en una carpeta denominada "UCI HAR Dataset".
+
+2.Asignación de cada grupo de datos a una variable, para este script las variables son:
+
+  *features <- contiene los datos del acelerómetro y giroscopio tAcc-XYZ y tGyro-XYZ.
+  *activities <- lista de actividades realizadas cuando se tomaron las medidas correspondientes y sus códigos (etiquetas).
+  *subjecttest <- contiene datos de prueba de 9/30 sujetos de prueba voluntarios que se están observando.
+  *xtest <- contiene datos de prueba de características registradas.
+  *ytest <- contiene datos de texto de etiquetas de código de actividades.
+  *subjecttrain <- contiene datos de trenes de 21/30 sujetos voluntarios observados.
+  *xtrain <- contiene los datos de las caracteristicas de los trenes.
+  *ytrain <- contiene datos de trenes de etiquetas de código de actividades.
+
+3.Fusiona los conjuntos de entrenamiento y prueba, utilizando la funcion "rbind" y "cbind", para crear un nuevo conjunto de datos, asignado a las siguientes nuevas variables:
+
+  *XData <- formado con la union de "xtest" y "xtrain", utilizando la función "rbind".
+  *YData <- formado con la union de "ytest" y "ytrain", utilizando la función "rbind".
+  *Subject <- formado con la union de "subjecttest" y "subjecttrain", utilizando la función "rbind".
+  *BindData <- formado con la union de "XData", "YData" y "Subject", utilizando la función "cbind".
+
+4.Extraer sólo los valores de la desviación media y estándar de cada medida y asignarla a la variable "TidyData":
+
+  *TidyData <- se crea realizando un subconjunto Merged_Data, seleccionando solo columnas: asunto, código y las medidas en la desviación media y estándar (std) para cada medida
+
+5.Usar nombres descriptivs para nombrar las actividades en el conjunto de datos, utilizando la función "gsub".
+
+  *Los números completos en la columna de código de "TidyData" se reemplazan con la actividad correspondiente tomada de la segunda columna de la variable de actividades.
+
+6.Etiqueta apropiadamente el conjunto de datos con nombres de variables descriptivo.
+
+7.A partir del conjunto de datos del paso 4, crea un segundo conjunto de datos ordenado e independiente con el promedio de cada variable para cada actividad y cada tema.
+  
+  *"FinalData" se crea resumiendo "TidyData" tomando las medias de cada variable para cada actividad y cada asignatura, luego agrupadas por asignatura y actividad.
+
+8. Exportar los datos usando la funcion "write.table".
